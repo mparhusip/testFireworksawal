@@ -9,6 +9,9 @@
 import SpriteKit
 import GameplayKit
 
+extension GameScene: SKSceneDelegate{
+}
+
 class GameScene: SKScene {
     
     
@@ -17,8 +20,6 @@ class GameScene: SKScene {
     let particleBlue = SKEmitterNode(fileNamed: "MyParticle")
     let particleRed = SKEmitterNode(fileNamed: "MyParticle")
 
-    
-    
     override func didMove(to view: SKView) {
         
         addChild(label)
