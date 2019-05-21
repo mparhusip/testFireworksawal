@@ -23,33 +23,58 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         
         addChild(label)
-        addChild(particle)
-        addChild(particleBlue!)
-        addChild(particleRed!)
+//        addChild(particle)
+//        addChild(particleBlue!)
+//        addChild(particleRed!)
         
         label.position = CGPoint(x: view.frame.width / 2 , y: view.frame.height / 2)
         label.fontSize = 50
         label.fontColor = SKColor.yellow
         label.fontName = "Avenir"
         
-        
+        particle.name = "particle1"
         particle.position = CGPoint(x: CGFloat.random(in: 0...view.frame.width), y: CGFloat.random(in: 0...view.frame.height))
-        
+//        particle.particleBirthRate = 2000
+//        particle.numParticlesToEmit = 500
+//        
         // Fade Out Action
 //        let moveParticle = SKAction.fadeOut(withDuration: 1)
 //
 //        particle.run(moveParticle)
         
         
-        
+        particleBlue?.name = "particle2"
         particleBlue?.particleColor = UIColor.blue
         particleBlue?.position = CGPoint(x: CGFloat.random(in: 0...view.frame.width), y: CGFloat.random(in: 0...view.frame.height))
-        
+//        particleBlue?.particleBirthRate = 2000
+//        particle.numParticlesToEmit = 500
+//
+        particleRed?.name = "particle3"
         particleRed?.particleColor = UIColor.red
         particleRed?.position = CGPoint(x: CGFloat.random(in: 0...view.frame.width), y: CGFloat.random(in: 0...view.frame.height))
+//        particleRed?.particleBirthRate = 2000
+//        particleRed?.numParticlesToEmit = 500
+//
+        
+        let allParticles: [SKEmitterNode] = [particle, particleBlue!, particleRed!]
+        
+        for particles in allParticles {
+            particles.isHidden = true
+            self.addChild(particles)
+        }
+        
+        print(allParticles)
         
         
-
+//        let actions = SKAction.repeatForever([SKAction.run(.unhide(), onChildWithName: "particle"), SKAction.run(.unhide(), onChildWithName: "particleBlue"), SKAction.run(.unhide(), onChildWithName: "particleRed")])
+        
+//         let actions = SKAction.repeatForever(SKAction.run(.unhide(), onChildWithName: "particleRed"))
+//
+        
+        let anotherActions = SKAction.sequence([.run(.unhide(), onChildWithName: "particle1"), .wait(forDuration: 1), .run(.unhide(), onChildWithName: "particle2"), .wait(forDuration: 1), .run(.unhide(), onChildWithName: "particle3"), .wait(forDuration: 1)
+        ])
+        
+        self.run(anotherActions)
         
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
         view.addGestureRecognizer(recognizer)
